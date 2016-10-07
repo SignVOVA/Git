@@ -133,3 +133,49 @@ color.diff=auto
 ...
 ```
 
+##Getting Help
+
+If you ever need help while using Git, there are three ways to get the manual page (manpage) help for any of the Git commands:
+``` python
+$ git help <verb>
+$ git <verb> --help
+$ man git-<verb>
+```
+
+#Getting a Git Repository
+
+##Initializing a Repository in an Existing Directory
+
+If you’re starting to track an existing project in Git, you need to go to the project’s directory and type
+``` python
+$ git init
+```
+
+This creates a new subdirectory named .git that contains all of your necessary repository files — a Git repository skeleton. At this point, nothing in your project is tracked yet.
+
+If you want to start version-controlling existing files (as opposed to an empty directory), you should probably begin tracking those files and do an initial commit.
+
+``` python
+$ git add *.c
+$ git add README
+$ git commit -m 'initial project version'
+```
+
+##Cloning an Existing Repository
+
+If you want to get a copy of an existing Git repository — for example, a project you’d like to contribute to — the command you need is ```git clone```.Git receives a copy of nearly all data that the server has. Every version of every file for the history of the project is pulled down when you run ```git clone```.
+
+You clone a repository with ```git clone [url]```.
+``` python
+$ git clone https://github.com/UKHomeOffice/hof-bootstrap.git
+```
+That creates a directory named ```hof-bootstrap```, initializes a ```.git``` directory inside it, pulls down all the data for that repository, and checks out a working copy of the latest version. If you go into the new ```hof-bootstrap``` directory, you’ll see the project files in there, ready to be worked on or used
+
+If you want to clone the repository into a directory named something other than grit, you can specify that as the next command-line option:
+``` python
+$ git clone https://github.com/UKHomeOffice/hof-bootstrap.git mybootstrap
+```
+
+That command does the same thing as the previous one, but the target directory is called mygrit.
+
+Git has a number of different transfer protocols you can use. The previous example uses the ```git://``` protocol, but you may also see ```http(s)://``` or ```user@server:/path.git```, which uses the SSH transfer protocol.
