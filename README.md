@@ -59,3 +59,77 @@ A SHA-1 hash looks something like this:
 24b9da6552252987aa493b52f8696cd6d3b00373
 ```
 
+##Git Generally Only Adds Data
+
+Nearly all actions in Git only add data to the Git database. It is very difficult to get the system to do anything that is not undoable or to make it erase data in any way.
+This makes using Git a joy because we know we can experiment without the danger of severely screwing things up.
+
+##The Three States
+
+Git has three main states that your files can reside in: committed, modified, and staged. 
+Committed means that the data is safely stored in your local database. 
+Modified means that you have changed the file but have not committed it to your database yet. 
+Staged means that you have marked a modified file in its current version to go into your next commit snapshot.
+
+This leads us to the three main sections of a Git project: the Git directory, the working directory, and the staging area.
+
+![alt tag](https://git-scm.com/figures/18333fig0106-tn.png)
+
+Figure 1-6. Working directory, staging area, and Git directory.
+
+The basic Git workflow goes something like this:
+
+1. You modify files in your working directory.
+2. You stage the files, adding snapshots of them to your staging area.
+3. You do a commit, which takes the files as they are in the staging area and stores that snapshot permanently to your Git directory.
+
+#First-Time Git Setup
+
+## gitconfig
+
+Git comes with a tool called git config that lets you get and set configuration variables that control all aspects of how Git looks and operates. These variables can be stored in three different places:
+
+* ```/etc/gitconfig``` file: Contains values for every user on the system and all their repositories. If you pass the option ```--system``` to ```git config```, it reads and writes from this file specifically.
+* ```~/.gitconfig``` file: Specific to your user. You can make Git read and write to this file specifically by passing the ```--global``` option.
+* config file in the Git directory (that is, ```.git/config```) of whatever repository you’re currently using: Specific to that single repository. Each level overrides values in the previous level, so values in ```.git/config``` trump those in ```/etc/gitconfig```.
+
+##Your Identity
+
+You can set your user name and e-mail address.This is important because every Git commit uses this information, and it’s immutably baked into the commits you pass around:
+
+``` python
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com 
+```
+
+Once you pass the --global option, because then Git will always use that information for anything you do on that system.
+If you want to override this with a different name or e-mail address for specific projects, you can run the command without the --global option when you’re in that project.
+
+##Your Editor
+
+By default, Git uses your system’s default editor, which is generally Vi or Vim. If you want to use a different text editor, such as Emacs, you can do the following:
+``` python
+$ git config --global core.editor emacs
+```
+
+##Your Diff Tool
+
+Another useful option you may want to configure is the default diff tool to use to resolve merge conflicts. Say you want to use vimdiff:
+``` python
+$ git config --global merge.tool vimdiff
+```
+
+##Checking Your Settings
+
+If you want to check your settings, you can use the git config --list command to list all the settings Git can find at that point:
+``` python
+$ git config --list
+user.name=Scott Chacon
+user.email=schacon@gmail.com
+color.status=auto
+color.branch=auto
+color.interactive=auto
+color.diff=auto
+...
+```
+
