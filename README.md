@@ -179,3 +179,67 @@ $ git clone https://github.com/UKHomeOffice/hof-bootstrap.git mybootstrap
 That command does the same thing as the previous one, but the target directory is called mygrit.
 
 Git has a number of different transfer protocols you can use. The previous example uses the ```git://``` protocol, but you may also see ```http(s)://``` or ```user@server:/path.git```, which uses the SSH transfer protocol.
+
+#Recording Changes to the Repository
+
+Remember that each file in your working directory can be in one of two states: ```tracked``` or ```untracked```.
+```Tracked``` files are files that were in the last snapshot; they can be ```unmodified```, ```modified```, or ```staged```.
+```Untracked``` files are everything else — any files in your working directory that were not in your last snapshot and are not in your staging area. 
+When you first clone a repository, all of your files will be ```tracked``` and ```unmodified``` because you just checked them out and haven’t edited anything.
+
+As you edit files, Git sees them as modified, because you’ve changed them since your last commit. You stage these modified files and then commit all your staged changes, and the cycle repeats. This lifecycle is illustrated in Figure 2-1.
+
+![alt tag](https://git-scm.com/figures/18333fig0201-tn.png)
+
+Figure 2-1. The lifecycle of the status of your files.
+
+##Checking the Status of Your Files
+
+The main tool you use to determine which files are in which state is the git status command. If you run this command directly after a clone, you should see something like this:
+``` python
+$ git status
+On branch master
+nothing to commit, working directory clean
+```
+
+##Tracking New Files
+
+In order to begin tracking a new file, you use the command ```git add```. To begin tracking the ```README``` file, you can run this:
+``` python
+$ git add README
+```
+
+##Viewing Your Staged and Unstaged Changes
+
+If the ```git status``` command is too vague for you — you want to know exactly what you changed, not just which files were changed — you can use the ```git diff``` command.
+That command compares what is in your working directory with what is in your staging area. The result tells you the changes you’ve made that you haven’t yet staged.
+
+##Committing Your Changes
+
+Now that your staging area is set up the way you want it, you can commit your changes. Remember that anything that is still unstaged — any files you have created or modified that you haven’t run ```git add``` on since you edited them — won’t go into this commit. They will stay as modified files on your disk. In this case, the last time you ran ```git status```, you saw that everything was staged, so you’re ready to commit your changes. The simplest way to commit is to type ```git commit```
+
+Alternatively, you can type your commit message inline with the ```commit``` command by specifying it after a ```-m``` flag, like this:
+
+##Skipping the Staging Area
+
+If you want to skip the staging area, Git provides a simple shortcut. Providing the ```-a``` option to the ```git commit``` command makes Git automatically stage every file that is already tracked before doing the commit, letting you skip the ```git add``` part:
+``` python
+git commit -a -m 'added new IP table fix'
+```
+
+##Moving Files
+
+If you rename a file in Git, no metadata is stored in Git that tells it you renamed the file. However, Git is pretty smart about figuring that out after the fact — we’ll deal with detecting file movement a bit later.
+
+Thus it’s a bit confusing that Git has a ```mv``` command. If you want to rename a file in Git, you can run something like
+``` python
+$ git mv file_from file_to
+```
+
+However, this is equivalent to running something like this:
+``` python
+$ mv README README.txt
+$ git rm README
+$ git add README.txt
+```
+
