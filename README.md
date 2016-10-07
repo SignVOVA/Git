@@ -243,3 +243,34 @@ $ git rm README
 $ git add README.txt
 ```
 
+#Viewing the Commit History
+
+After you have created several commits, or if you have cloned a repository with an existing commit history, you’ll probably want to look back to see what has happened. The most basic and powerful tool to do this is the ```git log``` command.
+
+``` python
+commit a11bef06a3f659402fe7563abf99ad00de2209e6
+Author: Scott Chacon <schacon@gee-mail.com>
+Date:   Sat Mar 15 10:31:28 2008 -0700
+
+    first commit
+```
+
+One of the more helpful options is ```-p```, which shows the diff introduced in each commit. You can also use ```-2```, which limits the output to only the last two entries.
+
+#Using a GUI to Visualize History
+GitKraken demo...
+
+##Showing Your Remotes
+To see which remote servers you have configured, you can run the ```git remote``` command. It lists the shortnames of each remote handle you’ve specified. If you’ve cloned your repository, you should at least see origin — that is the default name Git gives to the server you cloned from
+
+You can also specify ```-v```, which shows you the URL that Git has stored for the shortname to be expanded to
+
+##Pushing to Your Remotes
+When you have your project at a point that you want to share, you have to push it upstream. The command for this is simple: git push ```[remote-name] [branch-name]```. If you want to push your master branch to your ```origin``` server (again, cloning generally sets up both of those names for you automatically), then you can run this to push your work back up to the server:
+``` python
+$ git push origin master
+```
+
+#Sumary
+At this point, you can do all the basic local Git operations — creating or cloning a repository, making changes, staging and committing those changes, and viewing the history of all the changes the repository has been through.
+
