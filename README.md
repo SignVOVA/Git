@@ -271,6 +271,6 @@ When you have your project at a point that you want to share, you have to push i
 $ git push origin master
 ```
 
-#Sumary
+#Summary
 At this point, you can do all the basic local Git operations — creating or cloning a repository, making changes, staging and committing those changes, and viewing the history of all the changes the repository has been through.
 
